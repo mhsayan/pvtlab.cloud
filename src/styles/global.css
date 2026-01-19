@@ -5,27 +5,27 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fafafa;
-  --foreground: #1a1a2e;
-  --accent: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-tertiary: #06b6d4;
-  --muted: #e5e7eb;
-  --border: #d1d5db;
+  --background: #faf9f7;
+  --foreground: #1c1917;
+  --accent: #b45309;
+  --accent-secondary: #d97706;
+  --accent-tertiary: #92400e;
+  --muted: #e7e5e4;
+  --border: #d6d3d1;
   --card-bg: #ffffff;
-  --card-hover: #f9fafb;
+  --card-hover: #fafaf9;
 }
 
 html[data-theme="dark"] {
-  --background: #0f0f1a;
-  --foreground: #f1f5f9;
-  --accent: #818cf8;
-  --accent-secondary: #a78bfa;
-  --accent-tertiary: #22d3ee;
-  --muted: #1e293b;
-  --border: #334155;
-  --card-bg: #1a1a2e;
-  --card-hover: #252542;
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --accent: #f59e0b;
+  --accent-secondary: #fbbf24;
+  --accent-tertiary: #d97706;
+  --muted: #292524;
+  --border: #44403c;
+  --card-bg: #1c1917;
+  --card-hover: #292524;
 }
 
 @theme inline {
@@ -171,8 +171,8 @@ html[data-theme="dark"] {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
