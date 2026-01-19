@@ -31,7 +31,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     <nav class="footer-nav">
       <a href="/posts">Posts</a>
       <a href="/about">About</a>
-      <a href="/search">Search</a>
+      <button type="button" class="footer-search-btn" id="footer-search-btn">Search</button>
       {SITE.showArchives && <a href="/archives">Archives</a>}
       <a href="/rss.xml" target="_blank">RSS</a>
     </nav>
@@ -72,8 +72,24 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     });
   }
 
+  function setupFooterSearch() {
+    const btn = document.getElementById("footer-search-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const openSearchModal = (window as { openSearchModal?: () => void }).openSearchModal;
+      if (openSearchModal) {
+        openSearchModal();
+      }
+    });
+  }
+
   setupBackToTop();
-  document.addEventListener("astro:after-swap", setupBackToTop);
+  setupFooterSearch();
+  document.addEventListener("astro:after-swap", () => {
+    setupBackToTop();
+    setupFooterSearch();
+  });
 </script>
 
 <style>
@@ -137,8 +153,19 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     transition: color 0.2s;
   }
 
-  .footer-nav a:hover {
+  .footer-nav a:hover,
+  .footer-nav button:hover {
     color: var(--accent);
+  }
+
+  .footer-search-btn {
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s;
   }
 
   .footer-right {
