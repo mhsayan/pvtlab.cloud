@@ -257,13 +257,99 @@ html[data-theme="dark"] {
   }
 }
 
-/* Hero Content */
+/* Hero Wrapper - Two Column Layout */
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hero-wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+}
+
+/* Hero Content - Left Column */
 .hero-content {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  flex: 1;
+  max-width: 600px;
+}
+
+@media (max-width: 1023px) {
+  .hero-content {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+/* Hero Quote - Right Column */
+.hero-quote {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 380px;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .hero-quote {
+    display: block;
+  }
+}
+
+.quote-card {
+  position: relative;
+  padding: 2rem;
+  background: color-mix(in srgb, var(--card-bg) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+.quote-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: color-mix(in srgb, var(--accent) 30%, transparent);
+  margin-bottom: 1rem;
+}
+
+.quote-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--foreground);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+}
+
+.quote-author {
+  display: flex;
   align-items: center;
-  text-align: center;
-  padding: 2rem 1rem;
+  gap: 0.75rem;
+}
+
+.quote-dash {
+  width: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  border-radius: 1px;
+}
+
+.quote-author cite {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-style: normal;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 /* Status Badge */
@@ -408,9 +494,15 @@ html[data-theme="dark"] {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
   margin-bottom: 2.5rem;
+}
+
+@media (max-width: 1023px) {
+  .hero-actions {
+    justify-content: center;
+  }
 }
 
 .btn-primary {
@@ -466,11 +558,23 @@ html[data-theme="dark"] {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 1023px) {
+  .hero-socials-label {
+    text-align: center;
+  }
+}
+
 .hero-socials-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.75rem;
+}
+
+@media (max-width: 1023px) {
+  .hero-socials-list {
+    justify-content: center;
+  }
 }
 
 /* Social buttons */

@@ -31,85 +31,104 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <div class="hero-grid"></div>
       </div>
 
-      <!-- Hero Content -->
-      <div class="hero-content app-layout">
-        <!-- Status Badge -->
-        <div class="hero-fade-in" style="--delay: 0s">
-          <span class="status-badge">
-            <span class="status-dot">
-              <span class="status-ping"></span>
-              <span class="status-core"></span>
+      <!-- Hero Content - Two Column Layout -->
+      <div class="hero-wrapper app-layout">
+        <!-- Left Column: Main Content -->
+        <div class="hero-content">
+          <!-- Status Badge -->
+          <div class="hero-fade-in" style="--delay: 0s">
+            <span class="status-badge">
+              <span class="status-dot">
+                <span class="status-ping"></span>
+                <span class="status-core"></span>
+              </span>
+              Available for opportunities
             </span>
-            Available for opportunities
-          </span>
-        </div>
+          </div>
 
-        <!-- Main Heading -->
-        <div class="hero-fade-in" style="--delay: 0.1s">
-          <h1 class="hero-title">
-            <span class="hero-title-line">Hi, I'm</span>
-            <span class="hero-title-name">Sayan</span>
-          </h1>
-        </div>
+          <!-- Main Heading -->
+          <div class="hero-fade-in" style="--delay: 0.1s">
+            <h1 class="hero-title">
+              <span class="hero-title-line">Hi, I'm</span>
+              <span class="hero-title-name">Sayan</span>
+            </h1>
+          </div>
 
-        <!-- Role/Subtitle -->
-        <div class="hero-fade-in" style="--delay: 0.2s">
-          <p class="hero-subtitle">
-            <span class="typing-text">Developer & Creative Thinker</span>
-          </p>
-        </div>
+          <!-- Role/Subtitle -->
+          <div class="hero-fade-in" style="--delay: 0.2s">
+            <p class="hero-subtitle">
+              <span class="typing-text">Developer & Creative Thinker</span>
+            </p>
+          </div>
 
-        <!-- Description -->
-        <div class="hero-fade-in" style="--delay: 0.3s">
-          <p class="hero-description">
-            Welcome to my personal blog and digital space. Here I share my thoughts,
-            ideas, and things I learn along the way.
-          </p>
-        </div>
+          <!-- Description -->
+          <div class="hero-fade-in" style="--delay: 0.3s">
+            <p class="hero-description">
+              Welcome to my personal blog and digital space. Here I share my thoughts,
+              ideas, and things I learn along the way.
+            </p>
+          </div>
 
-        <!-- CTA Buttons -->
-        <div class="hero-fade-in hero-actions" style="--delay: 0.4s">
-          <a href="/posts" class="btn-primary group">
-            Read Blog
-            <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a href="/about" class="btn-secondary">
-            About Me
-          </a>
-        </div>
+          <!-- CTA Buttons -->
+          <div class="hero-fade-in hero-actions" style="--delay: 0.4s">
+            <a href="/posts" class="btn-primary group">
+              Read Blog
+              <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a href="/about" class="btn-secondary">
+              About Me
+            </a>
+          </div>
 
-        <!-- Social Links -->
-        {
-          SOCIALS.length > 0 && (
-            <div class="hero-fade-in hero-socials" style="--delay: 0.5s">
-              <p class="hero-socials-label">Find me on</p>
-              <div class="hero-socials-list">
-                {SOCIALS.map(social => (
+          <!-- Social Links -->
+          {
+            SOCIALS.length > 0 && (
+              <div class="hero-fade-in hero-socials" style="--delay: 0.5s">
+                <p class="hero-socials-label">Find me on</p>
+                <div class="hero-socials-list">
+                  {SOCIALS.map(social => (
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="social-btn group"
+                      title={social.linkTitle}
+                    >
+                      <social.icon class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
+                      <span class="sr-only">{social.linkTitle}</span>
+                    </a>
+                  ))}
                   <a
-                    href={social.href}
+                    href="/rss.xml"
                     target="_blank"
-                    rel="noopener noreferrer"
                     class="social-btn group"
-                    title={social.linkTitle}
+                    aria-label="RSS Feed"
+                    title="RSS Feed"
                   >
-                    <social.icon class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
-                    <span class="sr-only">{social.linkTitle}</span>
+                    <IconRss class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
+                    <span class="sr-only">RSS Feed</span>
                   </a>
-                ))}
-                <a
-                  href="/rss.xml"
-                  target="_blank"
-                  class="social-btn group"
-                  aria-label="RSS Feed"
-                  title="RSS Feed"
-                >
-                  <IconRss class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
-                  <span class="sr-only">RSS Feed</span>
-                </a>
+                </div>
               </div>
-            </div>
-          )
-        }
+            )
+          }
+        </div>
+
+        <!-- Right Column: Quote -->
+        <div class="hero-quote hero-fade-in" style="--delay: 0.4s">
+          <blockquote class="quote-card">
+            <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <p class="quote-text">
+              The only way to do great work is to love what you do.
+            </p>
+            <footer class="quote-author">
+              <span class="quote-dash"></span>
+              <cite>Steve Jobs</cite>
+            </footer>
+          </blockquote>
+        </div>
       </div>
 
       <!-- Scroll indicator -->
