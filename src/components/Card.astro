@@ -10,24 +10,52 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, tags, ...props } = data;
 ---
 
-<li class="my-6">
-  <a
-    href={getPath(id, filePath)}
+<li class="group my-4">
+  <article
     class:list={[
-      "inline-block text-lg font-medium text-accent",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
+      "card-hover p-5 sm:p-6 rounded-xl",
+      "bg-card-bg border border-border/50",
+      "hover:border-accent/30 hover:bg-card-hover",
     ]}
   >
-    <Heading
-      style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+    <a
+      href={getPath(id, filePath)}
+      class:list={[
+        "block text-lg sm:text-xl font-semibold text-foreground",
+        "hover:text-accent transition-colors duration-200",
+        "focus-visible:no-underline focus-visible:underline-offset-0",
+      ]}
     >
-      {title}
-    </Heading>
-  </a>
-  <Datetime {...props} />
-  <p>{description}</p>
+      <Heading
+        style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+        class="leading-snug"
+      >
+        {title}
+      </Heading>
+    </a>
+
+    <div class="mt-2 mb-3">
+      <Datetime {...props} class="text-sm text-foreground/60" />
+    </div>
+
+    <p class="text-foreground/70 leading-relaxed text-sm sm:text-base line-clamp-2">
+      {description}
+    </p>
+
+    {
+      tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {tags.slice(0, 3).map(tag => (
+            <span class="tag-pill">{tag}</span>
+          ))}
+          {tags.length > 3 && (
+            <span class="text-xs text-foreground/50">+{tags.length - 3} more</span>
+          )}
+        </div>
+      )
+    }
+  </article>
 </li>

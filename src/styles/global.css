@@ -5,19 +5,25 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --background: #fafafa;
+  --foreground: #1a1a2e;
+  --accent: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --muted: #e5e7eb;
+  --border: #d1d5db;
+  --card-bg: #ffffff;
+  --card-hover: #f9fafb;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+  --background: #0f0f1a;
+  --foreground: #f1f5f9;
+  --accent: #818cf8;
+  --accent-secondary: #a78bfa;
+  --muted: #1e293b;
+  --border: #334155;
+  --card-bg: #1a1a2e;
+  --card-hover: #252542;
 }
 
 @theme inline {
@@ -25,8 +31,11 @@ html[data-theme="dark"] {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-card-bg: var(--card-bg);
+  --color-card-hover: var(--card-hover);
 }
 
 @layer base {
@@ -39,20 +48,34 @@ html[data-theme="dark"] {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
+    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-white;
   }
   a,
   button {
-    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed transition-colors duration-200;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+  /* Improved heading sizes */
+  h1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl leading-tight;
+  }
+  h2 {
+    @apply text-2xl sm:text-3xl leading-snug;
+  }
+  h3 {
+    @apply text-xl sm:text-2xl leading-snug;
+  }
+  /* Better body text line-height */
+  p {
+    @apply leading-relaxed;
+  }
 }
 
 @utility max-w-app {
-  @apply max-w-3xl;
+  @apply max-w-5xl;
 }
 
 @utility app-layout {
@@ -63,10 +86,20 @@ html[data-theme="dark"] {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-gradient-to-r from-accent to-accent-secondary bg-clip-text text-transparent;
+}
+
+/* Smooth transitions globally */
+.transition-base {
+  @apply transition-all duration-200 ease-in-out;
+}
+
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 1rem;
+  scroll-margin-block: 5rem;
 }
 
 /* Respect user's motion preferences */
@@ -79,4 +112,33 @@ html[data-theme="dark"] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+}
+.card-hover:hover {
+  @apply -translate-y-1 shadow-lg shadow-accent/10;
+}
+
+/* Pill button style */
+.pill-btn {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-border text-sm font-medium transition-all duration-200;
+}
+.pill-btn:hover {
+  @apply bg-accent/10 border-accent/50 text-accent;
+}
+
+/* Tag pill style */
+.tag-pill {
+  @apply inline-block px-2.5 py-0.5 text-xs font-medium rounded-full bg-accent/10 text-accent border border-accent/20 transition-all duration-200;
+}
+.tag-pill:hover {
+  @apply bg-accent/20 border-accent/40;
+}
+
+/* Improved focus states */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-accent;
 }

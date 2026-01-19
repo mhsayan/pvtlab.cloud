@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
@@ -22,64 +21,77 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
-    <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Hello, I'm Sayan
+    <section id="hero" class="pt-12 pb-10 sm:pt-16 sm:pb-12">
+      <p class="text-sm font-medium text-accent uppercase tracking-wider mb-3">
+        Welcome to my digital space
+      </p>
+      <h1 class="my-4 inline-block font-bold sm:my-6">
+        <span class="gradient-text">Hello, I'm Sayan</span>
       </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      <p class="text-lg sm:text-xl text-foreground/80 mb-2">
+        Developer & Creative Thinker
+      </p>
 
-      <p>
+      <p class="max-w-2xl text-foreground/70 mt-6 mb-8 text-base sm:text-lg leading-relaxed">
         Welcome to my personal blog and digital space. Here I share my thoughts,
         ideas, and things I learn along the way.
       </p>
+
       {
-        // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
+          <div class="flex flex-wrap items-center gap-3 mt-6">
+            {SOCIALS.map(social => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="pill-btn group"
+                title={social.linkTitle}
+              >
+                <social.icon class="size-4 stroke-current stroke-2 group-hover:stroke-accent transition-colors" />
+                <span class="text-sm">{social.name}</span>
+              </a>
+            ))}
+            <a
+              href="/rss.xml"
+              target="_blank"
+              class="pill-btn group"
+              aria-label="RSS Feed"
+              title="RSS Feed"
+            >
+              <IconRss class="size-4 stroke-current stroke-2 group-hover:stroke-accent transition-colors" />
+              <span class="text-sm">RSS</span>
+            </a>
           </div>
         )
       }
     </section>
 
+    <div class="border-t border-border"></div>
+
     {
       featuredPosts.length > 0 && (
-        <section
-          id="featured"
-          class:list={[
-            "pt-12 pb-6",
-            { "border-b border-border": recentPosts.length > 0 },
-          ]}
-        >
-          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-          <ul>
-            {featuredPosts.map(data => (
-              <Card variant="h3" {...data} />
-            ))}
-          </ul>
-        </section>
+        <>
+          <section id="featured" class="pt-12 pb-8">
+            <h2 class="font-semibold tracking-wide mb-2">Featured</h2>
+            <p class="text-foreground/60 text-sm mb-6">Hand-picked posts worth reading</p>
+            <ul class="space-y-4">
+              {featuredPosts.map(data => (
+                <Card variant="h3" {...data} />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <div class="border-t border-border" />}
+        </>
       )
     }
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
+        <section id="recent-posts" class="pt-12 pb-8">
+          <h2 class="font-semibold tracking-wide mb-2">Recent Posts</h2>
+          <p class="text-foreground/60 text-sm mb-6">Latest thoughts and updates</p>
+          <ul class="space-y-4">
             {recentPosts.map(
               (data, index) =>
                 index < SITE.postPerIndex && <Card variant="h3" {...data} />
@@ -89,10 +101,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       )
     }
 
-    <div class="my-8 text-center">
-      <LinkButton href="/posts/">
-        All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
+    <div class="my-10 text-center">
+      <LinkButton
+        href="/posts/"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-white font-medium hover:bg-accent/90 transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"
+      >
+        View All Posts
+        <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
       </LinkButton>
     </div>
   </main>
