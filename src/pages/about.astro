@@ -1,0 +1,135 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+
+// Work experience data
+const experiences = [
+  {
+    company: "Company Name",
+    role: "Software Developer",
+    duration: "2023 - Present",
+    description: "Building modern web applications and contributing to open-source projects. Working with React, TypeScript, and Node.js to deliver scalable solutions.",
+    highlights: [
+      "Developed and maintained multiple client-facing applications",
+      "Collaborated with cross-functional teams to deliver features",
+      "Implemented CI/CD pipelines and improved deployment processes"
+    ]
+  },
+  {
+    company: "Previous Company",
+    role: "Junior Developer",
+    duration: "2021 - 2023",
+    description: "Started my professional journey learning best practices in software development and contributing to team projects.",
+    highlights: [
+      "Built responsive web interfaces using modern frameworks",
+      "Participated in code reviews and agile ceremonies",
+      "Assisted in database design and API development"
+    ]
+  }
+];
+---
+
+<Layout title={`About | ${SITE.title}`}>
+  <Header />
+  <main id="main-content">
+    <!-- About Hero Section -->
+    <section class="about-hero">
+      <!-- Background (subtle version) -->
+      <div class="about-hero-bg">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-grid"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="about-hero-content app-layout">
+        <div class="hero-fade-in" style="--delay: 0s">
+          <h1 class="about-hero-title">About Me</h1>
+        </div>
+        <div class="hero-fade-in" style="--delay: 0.1s">
+          <p class="about-hero-subtitle">Developer, Creator, Lifelong Learner</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="app-layout about-content">
+      <!-- Introduction -->
+      <section class="about-section hero-fade-in" style="--delay: 0.2s">
+        <div class="about-intro">
+          <p>
+            Hi! I'm <strong>Mahmudul Hasan Sayan</strong>, a passionate developer based in Bangladesh.
+            I love building things for the web and exploring new technologies.
+          </p>
+          <p>
+            This is my digital space where I share my thoughts, ideas, and things I learn along the way.
+            I believe in continuous learning and the power of sharing knowledge with the community.
+          </p>
+          <p>
+            When I'm not coding, you'll find me exploring new ideas, reading about technology trends,
+            or working on personal projects that challenge me to grow.
+          </p>
+        </div>
+      </section>
+
+      <!-- Work Experience -->
+      <section class="about-section hero-fade-in" style="--delay: 0.3s">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="experience-timeline">
+          {experiences.map((exp, index) => (
+            <article class="experience-card card-hover" style={`--delay: ${0.4 + index * 0.1}s`}>
+              <div class="experience-header">
+                <div class="experience-company">{exp.company}</div>
+                <div class="experience-duration">{exp.duration}</div>
+              </div>
+              <div class="experience-role">{exp.role}</div>
+              <p class="experience-description">{exp.description}</p>
+              {exp.highlights && exp.highlights.length > 0 && (
+                <ul class="experience-highlights">
+                  {exp.highlights.map(highlight => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Let's Connect CTA -->
+      <section class="about-section about-cta hero-fade-in" style="--delay: 0.6s">
+        <h2 class="cta-title">Let's Connect</h2>
+        <p class="cta-description">
+          I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.
+        </p>
+        <div class="cta-actions">
+          {SOCIALS.length > 0 && (
+            <div class="cta-socials">
+              {SOCIALS.map(social => (
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-btn group"
+                  title={social.linkTitle}
+                >
+                  <social.icon class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
+                  <span class="sr-only">{social.linkTitle}</span>
+                </a>
+              ))}
+            </div>
+          )}
+          <a href="/posts" class="btn-primary group">
+            Read My Blog
+            <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

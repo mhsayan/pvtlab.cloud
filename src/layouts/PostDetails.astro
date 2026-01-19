@@ -13,7 +13,9 @@ import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -159,6 +161,36 @@ const nextPost =
         )
       }
     </div>
+
+    <!-- Let's Connect CTA -->
+    <section data-pagefind-ignore class="about-cta mt-12">
+      <h2 class="cta-title">Let's Connect</h2>
+      <p class="cta-description">
+        Enjoyed this post? I'm always open to discussing new ideas, interesting projects, or just having a chat about technology.
+      </p>
+      <div class="cta-actions">
+        {SOCIALS.length > 0 && (
+          <div class="cta-socials">
+            {SOCIALS.map(social => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn group"
+                title={social.linkTitle}
+              >
+                <social.icon class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
+                <span class="sr-only">{social.linkTitle}</span>
+              </a>
+            ))}
+          </div>
+        )}
+        <a href="/posts" class="btn-primary group">
+          More Posts
+          <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </section>
   </main>
   <Footer />
 </Layout>
