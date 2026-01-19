@@ -120,30 +120,27 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </div>
     </section>
 
-    <!-- Posts Sections -->
-    <div class="app-layout">
+    <!-- Posts Sections - seamless continuation -->
+    <div class="app-layout posts-section">
       {
         featuredPosts.length > 0 && (
-          <>
-            <section id="featured" class="pt-16 pb-8">
-              <h2 class="font-semibold tracking-wide mb-2">Featured</h2>
-              <p class="text-foreground/60 text-sm mb-6">Hand-picked posts worth reading</p>
-              <ul class="space-y-4">
-                {featuredPosts.map(data => (
-                  <Card variant="h3" {...data} />
-                ))}
-              </ul>
-            </section>
-            {recentPosts.length > 0 && <div class="border-t border-border" />}
-          </>
+          <section id="featured" class="pb-12">
+            <h2 class="font-semibold tracking-wide mb-2">Featured</h2>
+            <p class="text-foreground/50 text-sm mb-6">Hand-picked posts worth reading</p>
+            <ul class="space-y-4">
+              {featuredPosts.map(data => (
+                <Card variant="h3" {...data} />
+              ))}
+            </ul>
+          </section>
         )
       }
 
       {
         recentPosts.length > 0 && (
-          <section id="recent-posts" class="pt-12 pb-8">
+          <section id="recent-posts" class="pb-12">
             <h2 class="font-semibold tracking-wide mb-2">Recent Posts</h2>
-            <p class="text-foreground/60 text-sm mb-6">Latest thoughts and updates</p>
+            <p class="text-foreground/50 text-sm mb-6">Latest thoughts and updates</p>
             <ul class="space-y-4">
               {recentPosts.map(
                 (data, index) =>
@@ -154,7 +151,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         )
       }
 
-      <div class="my-10 text-center">
+      <div class="pb-16 text-center">
         <LinkButton
           href="/posts/"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-white font-medium hover:bg-accent/90 transition-all duration-200 hover:shadow-lg hover:shadow-accent/25"

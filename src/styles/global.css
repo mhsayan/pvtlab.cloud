@@ -155,15 +155,20 @@ html[data-theme="dark"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* Hero Background */
+/* Hero Background - extends beyond hero for smooth blend */
 .hero-bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -200px;
   z-index: -1;
   overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
 }
 
 /* Grid pattern */
@@ -518,4 +523,10 @@ html[data-theme="dark"] {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Posts section - seamless blend with hero */
+.posts-section {
+  position: relative;
+  z-index: 1;
 }
