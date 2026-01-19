@@ -4,8 +4,8 @@ import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Card from "@/components/Card.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
+import { getPath } from "@/utils/getPath";
 import { SITE } from "@/config";
 
 // Redirect to 404 page if `showArchives` config is false
@@ -16,68 +16,151 @@ if (!SITE.showArchives) {
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
   "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
+
+const formatDate = (date: Date) => {
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  return `${month} ${day}`;
+};
 ---
 
 <Layout title={`Archives | ${SITE.title}`}>
   <Header />
   <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
-    {
-      Object.entries(
-        getPostsByGroupCondition(posts, post =>
-          post.data.pubDatetime.getFullYear()
+    <div class="archive-container">
+      {
+        Object.entries(
+          getPostsByGroupCondition(posts, post =>
+            post.data.pubDatetime.getFullYear()
+          )
         )
-      )
-        .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
-        .map(([year, yearGroup]) => (
-          <div>
-            <span class="text-2xl font-bold">{year}</span>
-            <sup class="text-sm">{yearGroup.length}</sup>
-            {Object.entries(
-              getPostsByGroupCondition(
-                yearGroup,
-                post => post.data.pubDatetime.getMonth() + 1
-              )
-            )
-              .sort(([monthA], [monthB]) => Number(monthB) - Number(monthA))
-              .map(([month, monthGroup]) => (
-                <div class="flex flex-col sm:flex-row">
-                  <div class="mt-6 min-w-36 text-lg sm:my-6">
-                    <span class="font-bold">{months[Number(month) - 1]}</span>
-                    <sup class="text-xs">{monthGroup.length}</sup>
-                  </div>
-                  <ul>
-                    {monthGroup
-                      .sort(
-                        (a, b) =>
-                          Math.floor(
-                            new Date(b.data.pubDatetime).getTime() / 1000
-                          ) -
-                          Math.floor(
-                            new Date(a.data.pubDatetime).getTime() / 1000
-                          )
-                      )
-                      .map(data => (
-                        <Card {...data} />
-                      ))}
-                  </ul>
-                </div>
-              ))}
-          </div>
-        ))
-    }
+          .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+          .map(([year, yearGroup], yearIndex) => (
+            <section class="year-section" style={`--delay: ${yearIndex * 0.1}s`}>
+              <h2 class="year-heading">{year}</h2>
+              <ul class="posts-list">
+                {yearGroup
+                  .sort(
+                    (a, b) =>
+                      new Date(b.data.pubDatetime).getTime() -
+                      new Date(a.data.pubDatetime).getTime()
+                  )
+                  .map((post, postIndex) => (
+                    <li style={`--post-delay: ${postIndex * 0.03}s`}>
+                      <a href={getPath(post.id, post.filePath)} class="post-link">
+                        <time class="post-date">
+                          {formatDate(new Date(post.data.pubDatetime))}
+                        </time>
+                        <span class="post-title">{post.data.title}</span>
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </section>
+          ))
+      }
+    </div>
   </Main>
   <Footer />
 </Layout>
+
+<style>
+  .archive-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .year-section {
+    animation: fadeIn 0.4s ease-out both;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .year-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  }
+
+  .posts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .posts-list li {
+    animation: fadeIn 0.3s ease-out both;
+    animation-delay: calc(var(--delay, 0s) + var(--post-delay, 0s));
+  }
+
+  .post-link {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 0.625rem 0;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: color 0.15s ease;
+  }
+
+  .post-link:hover .post-title {
+    color: var(--accent);
+  }
+
+  .post-date {
+    flex-shrink: 0;
+    width: 3.5rem;
+    font-size: 0.8125rem;
+    font-weight: 450;
+    color: color-mix(in srgb, var(--foreground) 45%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-title {
+    font-size: 0.9375rem;
+    font-weight: 450;
+    color: var(--foreground);
+    line-height: 1.5;
+    transition: color 0.15s ease;
+  }
+
+  @media (min-width: 640px) {
+    .post-date {
+      width: 4rem;
+      font-size: 0.875rem;
+    }
+
+    .post-title {
+      font-size: 1rem;
+    }
+  }
+</style>
