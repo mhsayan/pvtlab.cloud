@@ -81,7 +81,28 @@ html[data-theme="dark"] {
 }
 
 .active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply text-accent;
+  position: relative;
+}
+
+.active-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+@media (min-width: 640px) {
+  .active-nav::after {
+    bottom: -6px;
+    width: 5px;
+    height: 5px;
+  }
 }
 
 .gradient-text {
