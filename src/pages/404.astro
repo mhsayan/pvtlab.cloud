@@ -13,16 +13,33 @@ import { SITE } from "@/config";
     id="main-content"
     class="app-layout flex flex-1 items-center justify-center"
   >
-    <div class="mb-14 flex flex-col items-center justify-center">
+    <div class="mb-14 flex flex-col items-center justify-center text-center">
       <h1 class="text-9xl font-bold text-accent">404</h1>
       <span aria-hidden="true">¯\_(ツ)_/¯</span>
       <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
-      <LinkButton
-        href="/"
-        class="my-6 text-lg underline decoration-dashed underline-offset-8"
-      >
-        Go back home
-      </LinkButton>
+      <p class="mt-2 text-muted-foreground opacity-75">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <LinkButton
+          href="/"
+          class="text-lg underline decoration-dashed underline-offset-8"
+        >
+          Go home
+        </LinkButton>
+        <LinkButton
+          href="/posts"
+          class="text-lg underline decoration-dashed underline-offset-8"
+        >
+          Browse posts
+        </LinkButton>
+        <LinkButton
+          href="/search"
+          class="text-lg underline decoration-dashed underline-offset-8"
+        >
+          Search
+        </LinkButton>
+      </div>
     </div>
   </main>
 
