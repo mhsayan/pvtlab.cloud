@@ -537,7 +537,7 @@ html[data-theme="dark"] {
 
 .about-hero {
   position: relative;
-  padding: 6rem 0 4rem;
+  padding: 5rem 0 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -546,20 +546,42 @@ html[data-theme="dark"] {
 
 @media (min-width: 640px) {
   .about-hero {
-    padding: 8rem 0 5rem;
+    padding: 6rem 0 4rem;
   }
 }
 
 .about-hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -100px;
+  inset: 0;
   z-index: -1;
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+}
+
+.about-hero-glow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--accent) 15%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 5%, transparent) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+}
+
+.about-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 4%, transparent) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 0%, transparent 70%);
 }
 
 .about-hero-content {
@@ -607,16 +629,11 @@ html[data-theme="dark"] {
 }
 
 /* Introduction */
-.about-intro {
-  max-width: 48rem;
-  margin: 0 auto;
-}
-
 .about-intro p {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   line-height: 1.8;
-  color: color-mix(in srgb, var(--foreground) 85%, transparent);
-  margin-bottom: 1.25rem;
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
+  margin-bottom: 1rem;
 }
 
 .about-intro p:last-child {
