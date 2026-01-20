@@ -166,7 +166,7 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
           }
 
           throw new Error("Pagefind search function not found");
-        } catch (e) {
+        } catch {
           // Show dev warning if in dev mode
           if (import.meta.env.DEV) {
             showElement(searchDevWarning);
@@ -270,7 +270,7 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 
         // Render results
         renderResults(results);
-      } catch (err) {
+      } catch {
         hideElement(searchLoading);
         showElement(searchNoResults);
       }
