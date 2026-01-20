@@ -846,12 +846,19 @@ html[data-theme="dark"] {
 
 .hero-section-v2 {
   position: relative;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100svh - 70px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: visible;
-  padding: 2rem 0;
+  padding: 3rem 0;
+}
+
+@media (min-width: 640px) {
+  .hero-section-v2 {
+    min-height: calc(100vh - 80px);
+    padding: 2rem 0;
+  }
 }
 
 /* Inner container for positioning context */
@@ -861,13 +868,15 @@ html[data-theme="dark"] {
   max-width: 80rem;
   margin: 0 auto;
   padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
   .hero-inner-v2 {
     min-height: 70vh;
-    display: flex;
-    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
   }
 }
@@ -894,7 +903,8 @@ html[data-theme="dark"] {
 
 /* Status badge */
 .hero-status-v2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 @media (min-width: 1024px) {
@@ -904,6 +914,7 @@ html[data-theme="dark"] {
     right: 8%;
     transform: rotate(-3deg);
     margin-bottom: 0;
+    text-align: left;
   }
 }
 

@@ -115,8 +115,10 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   .footer-main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 5rem 0 4rem;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 3rem 0;
   }
 
   @media (min-width: 640px) {
@@ -124,25 +126,43 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 6rem 0 5rem;
+      text-align: left;
+      gap: 2rem;
+      padding: 4rem 0 3rem;
     }
   }
 
   .footer-brand {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-brand {
+      flex-direction: row;
+      gap: 0.75rem;
+    }
   }
 
   .footer-copyright {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     color: color-mix(in srgb, var(--foreground) var(--text-muted-light), transparent);
   }
 
   .footer-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-nav {
+      justify-content: flex-start;
+      gap: 1.25rem;
+    }
   }
 
   .footer-nav a {
@@ -169,7 +189,14 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   .footer-right {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-right {
+      justify-content: flex-end;
+    }
   }
 
   .footer-socials {
