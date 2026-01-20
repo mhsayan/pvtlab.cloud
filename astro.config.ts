@@ -68,6 +68,22 @@ export default defineConfig({
         weights: [300, 400, 500, 600, 700],
         styles: ["normal"],
       },
+      {
+        name: "JetBrains Mono",
+        cssVariable: "--font-jetbrains-mono",
+        provider: fontProviders.google(),
+        fallbacks: ["monospace"],
+        weights: [400, 500, 600],
+        styles: ["normal"],
+      },
+      {
+        name: "Playfair Display",
+        cssVariable: "--font-playfair-display",
+        provider: fontProviders.google(),
+        fallbacks: ["Georgia", "serif"],
+        weights: [700, 800, 900],
+        styles: ["normal"],
+      },
     ],
   },
 });

@@ -21,8 +21,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <!-- Full-Screen Hero Section -->
-    <section id="hero" class="hero-section">
+    <!-- Full-Screen Hero Section V2 - Asymmetric Editorial -->
+    <section id="hero" class="hero-section-v2">
       <!-- Animated Background -->
       <div class="hero-bg">
         <div class="hero-blob hero-blob-1"></div>
@@ -31,46 +31,60 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <div class="hero-grid"></div>
       </div>
 
-      <!-- Hero Content - Two Column Layout -->
-      <div class="hero-wrapper app-layout">
-        <!-- Left Column: Main Content -->
-        <div class="hero-content">
-          <!-- Status Badge -->
-          <div class="hero-fade-in" style="--delay: 0s">
-            <span class="status-badge">
-              <span class="status-dot">
-                <span class="status-ping"></span>
-                <span class="status-core"></span>
-              </span>
-              Available for opportunities
+      <!-- Geometric Shapes -->
+      <div class="hero-shapes" aria-hidden="true">
+        <div class="geo-ring geo-ring-1"></div>
+        <div class="geo-circle geo-circle-1"></div>
+        <div class="geo-square geo-square-1"></div>
+        <div class="geo-ring geo-ring-2"></div>
+        <div class="geo-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Inner Container for Positioning -->
+      <div class="hero-inner-v2">
+        <!-- Status Badge -->
+        <div class="hero-status-v2 hero-fade-in" style="--delay: 0s">
+          <span class="status-badge-v2">
+            <span class="status-dot">
+              <span class="status-ping"></span>
+              <span class="status-core"></span>
             </span>
+            Available for opportunities
+          </span>
+        </div>
+
+        <!-- Main Content -->
+        <div class="hero-content-v2">
+          <!-- "Hi, I'm" intro -->
+          <div class="hero-intro hero-fade-in" style="--delay: 0.1s">
+            HI, I'M
           </div>
 
-          <!-- Main Heading -->
-          <div class="hero-fade-in" style="--delay: 0.1s">
-            <h1 class="hero-title">
-              <span class="hero-title-line">Hi, I'm</span>
-              <span class="hero-title-name">Sayan</span>
-            </h1>
+          <!-- Name -->
+          <div class="hero-name-wrapper hero-fade-in" style="--delay: 0.15s">
+            <h1 class="hero-name-v2">Sayan</h1>
           </div>
 
-          <!-- Role/Subtitle -->
-          <div class="hero-fade-in" style="--delay: 0.2s">
-            <p class="hero-subtitle">
-              <span class="typing-text">Developer & Creative Thinker</span>
-            </p>
+          <!-- Subtitle with label -->
+          <div class="hero-subtitle-wrapper hero-fade-in" style="--delay: 0.2s">
+            <span class="hero-subtitle-label">Role</span>
+            <p class="hero-subtitle-v2">Developer & Creative Thinker</p>
           </div>
 
           <!-- Description -->
-          <div class="hero-fade-in" style="--delay: 0.3s">
-            <p class="hero-description">
+          <div class="hero-desc-wrapper hero-fade-in" style="--delay: 0.3s">
+            <p class="hero-description-v2">
               Welcome to my personal blog and digital space. Here I share my thoughts,
               ideas, and things I learn along the way.
             </p>
           </div>
 
           <!-- CTA Buttons -->
-          <div class="hero-fade-in hero-actions" style="--delay: 0.4s">
+          <div class="hero-cta-wrapper hero-fade-in" style="--delay: 0.4s">
             <a href="/posts" class="btn-primary group">
               Read Blog
               <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
@@ -80,10 +94,10 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             </a>
           </div>
 
-          <!-- Social Links -->
+          <!-- Socials (inside content on mobile) -->
           {
             SOCIALS.length > 0 && (
-              <div class="hero-fade-in hero-socials" style="--delay: 0.5s">
+              <div class="hero-socials-v2 hero-fade-in" style="--delay: 0.5s">
                 <p class="hero-socials-label">Find me on</p>
                 <div class="hero-socials-list">
                   {SOCIALS.map(social => (
@@ -114,9 +128,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           }
         </div>
 
-        <!-- Right Column: Quote -->
-        <div class="hero-quote hero-fade-in" style="--delay: 0.4s">
-          <blockquote class="quote-card">
+        <!-- Floating Quote Card -->
+        <div class="hero-quote-floating hero-fade-in" style="--delay: 0.4s">
+          <blockquote class="quote-card-v2">
             <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
             </svg>
