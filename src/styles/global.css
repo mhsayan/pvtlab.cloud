@@ -1791,3 +1791,278 @@ html[data-theme="dark"] {
     height: 300px;
   }
 }
+
+/* ========================================
+   POST DETAILS - Hero Section
+   ======================================== */
+
+.post-hero {
+  position: relative;
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.post-hero-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.post-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--background) 95%, transparent) 0%,
+    color-mix(in srgb, var(--background) 60%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+.post-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+}
+
+.post-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.post-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+.post-hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* Reading time badge */
+.reading-time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* ========================================
+   POST DETAILS - Layout with TOC
+   ======================================== */
+
+.post-layout {
+  position: relative;
+  width: 100%;
+}
+
+/* ========================================
+   POST DETAILS - Table of Contents (TOC)
+   ======================================== */
+
+.post-toc {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    left: max(1rem, calc((100vw - 64rem) / 2 - 16rem));
+    top: 6rem;
+    width: 14rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    padding: 1rem;
+    padding-right: 1rem;
+    border-right: 1px solid var(--border);
+  }
+}
+
+@media (min-width: 1600px) {
+  .post-toc {
+    left: calc((100vw - 64rem) / 2 - 18rem);
+    width: 16rem;
+  }
+}
+
+.post-toc-title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.post-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Nested list for H3s */
+.post-toc-list .post-toc-list {
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  margin-top: 0.25rem;
+}
+
+.post-toc-item {
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.post-toc-item.active > .post-toc-link {
+  color: var(--accent);
+}
+
+.post-toc-link {
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 65%, transparent);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+.post-toc-link:hover {
+  color: var(--accent);
+}
+
+/* Bullet indicator */
+.post-toc-link::before {
+  content: '';
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+  margin-top: 0.4rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--foreground) 30%, transparent);
+  transition: background var(--duration-fast);
+}
+
+.post-toc-item.active > .post-toc-link::before,
+.post-toc-link:hover::before {
+  background: var(--accent);
+}
+
+/* H3 items - smaller font */
+.post-toc-h3 .post-toc-link {
+  font-size: 0.75rem;
+}
+
+.post-toc-h3 .post-toc-link::before {
+  width: 3px;
+  height: 3px;
+  margin-top: 0.35rem;
+}
+
+/* ========================================
+   POST DETAILS - Enhanced Prev/Next Navigation
+   ======================================== */
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 640px) {
+  .post-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.post-nav-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: all var(--duration-slow) ease-out;
+}
+
+.post-nav-card:hover {
+  background: var(--card-hover);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.post-nav-card--next {
+  text-align: right;
+}
+
+@media (min-width: 640px) {
+  .post-nav-card--next {
+    grid-column: 2;
+  }
+}
+
+.post-nav-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.post-nav-card--next .post-nav-label {
+  justify-content: flex-end;
+}
+
+.post-nav-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+}
+
+.post-nav-date {
+  font-size: 0.8125rem;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+.post-nav-arrow {
+  transition: transform var(--duration-fast);
+}
+
+.post-nav-card:hover .post-nav-arrow--prev {
+  transform: translateX(-4px);
+}
+
+.post-nav-card:hover .post-nav-arrow--next {
+  transform: translateX(4px);
+}
