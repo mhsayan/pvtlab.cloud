@@ -36,14 +36,16 @@ const experiences = [
 <Layout title={`About | ${SITE.title}`}>
   <Header />
   <main id="main-content">
+    <!-- Page Background Effects -->
+    <div class="page-bg" aria-hidden="true">
+      <div class="page-bg-blob"></div>
+      <div class="page-bg-blob-2"></div>
+      <div class="page-bg-grid"></div>
+      <div class="page-bg-ring"></div>
+    </div>
+
     <!-- About Hero Section -->
     <section class="about-hero">
-      <!-- Subtle Background -->
-      <div class="about-hero-bg">
-        <div class="about-hero-glow"></div>
-        <div class="about-hero-grid"></div>
-      </div>
-
       <!-- Hero Content -->
       <div class="about-hero-content app-layout">
         <div class="hero-fade-in" style="--delay: 0s">

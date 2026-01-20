@@ -12,6 +12,14 @@ const { props } = Astro;
 const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
 ---
 
+<!-- Page Background Effects -->
+<div class="page-bg" aria-hidden="true">
+  <div class="page-bg-blob"></div>
+  <div class="page-bg-blob-2"></div>
+  <div class="page-bg-grid"></div>
+  <div class="page-bg-ring"></div>
+</div>
+
 <Breadcrumb />
 <main data-backUrl={backUrl} id="main-content" class="app-layout pb-4">
   {
