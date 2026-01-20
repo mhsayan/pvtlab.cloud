@@ -25,7 +25,9 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
           aria-label="Search posts"
         />
         <div class="search-shortcut">
-          <kbd class="search-kbd"><span class="search-kbd-modifier"></span>K</kbd>
+          <kbd class="search-kbd"
+            ><span class="search-kbd-modifier"></span>K</kbd
+          >
         </div>
       </div>
 
@@ -58,7 +60,10 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 
         <!-- Dev Warning -->
         <div id="search-dev-warning" class="search-dev-warning hidden">
-          <p><strong>Dev mode:</strong> Run <code>pnpm run build</code> first to index content.</p>
+          <p>
+            <strong>Dev mode:</strong> Run <code>pnpm run build</code> first to index
+            content.
+          </p>
         </div>
       </div>
 
@@ -107,8 +112,12 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 
   function initSearchModal() {
     const modal = document.getElementById("search-modal") as HTMLElement | null;
-    const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
-    const searchResultsList = document.getElementById("search-results-list") as HTMLUListElement | null;
+    const searchInput = document.getElementById(
+      "search-input"
+    ) as HTMLInputElement | null;
+    const searchResultsList = document.getElementById(
+      "search-results-list"
+    ) as HTMLUListElement | null;
     const searchEmpty = document.getElementById("search-empty");
     const searchLoading = document.getElementById("search-loading");
     const searchNoResults = document.getElementById("search-no-results");
@@ -150,7 +159,9 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
       pagefindLoading = (async () => {
         try {
           // Use Function constructor to create dynamic import that Vite won't analyze
-          const importFn = new Function("return import('/pagefind/pagefind.js')");
+          const importFn = new Function(
+            "return import('/pagefind/pagefind.js')"
+          );
           const module = await importFn();
 
           // Pagefind exports search function directly on the module
@@ -319,7 +330,9 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
     function navigateToSelected() {
       const items = resultsEl.querySelectorAll(".search-result-item");
       if (selectedIndex >= 0 && selectedIndex < items.length) {
-        const link = items[selectedIndex].querySelector("a") as HTMLAnchorElement;
+        const link = items[selectedIndex].querySelector(
+          "a"
+        ) as HTMLAnchorElement;
         if (link) {
           closeModal();
           window.location.href = link.href;
@@ -329,7 +342,7 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 
     // Event listeners
     // Keyboard shortcuts
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", e => {
       // Open with Cmd/Ctrl + K
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
@@ -356,7 +369,7 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
     });
 
     // Keyboard navigation in results
-    inputEl.addEventListener("keydown", (e) => {
+    inputEl.addEventListener("keydown", e => {
       const items = resultsEl.querySelectorAll(".search-result-item");
       if (items.length === 0) return;
 
@@ -375,12 +388,12 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
     });
 
     // Click on backdrop to close
-    modalEl.querySelectorAll("[data-search-close]").forEach((el) => {
+    modalEl.querySelectorAll("[data-search-close]").forEach(el => {
       el.addEventListener("click", closeModal);
     });
 
     // Click on results
-    resultsEl.addEventListener("click", (e) => {
+    resultsEl.addEventListener("click", e => {
       const target = e.target as HTMLElement;
       const item = target.closest(".search-result-item");
       if (item) {
