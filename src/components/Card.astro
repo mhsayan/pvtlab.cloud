@@ -38,7 +38,7 @@ const { title, description, tags, ...props } = data;
     </a>
 
     <div class="mt-2 mb-3">
-      <Datetime {...props} class="text-sm text-foreground/60" />
+      <Datetime {...props} class="text-sm text-foreground/70" />
     </div>
 
     <p class="text-foreground/70 leading-relaxed text-sm sm:text-base line-clamp-2">
@@ -52,7 +52,7 @@ const { title, description, tags, ...props } = data;
             <span class="tag-pill">{tag}</span>
           ))}
           {tags.length > 3 && (
-            <span class="text-xs text-foreground/50">+{tags.length - 3} more</span>
+            <span class="text-xs text-foreground/55">+{tags.length - 3} more</span>
           )}
         </div>
       )

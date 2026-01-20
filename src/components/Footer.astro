@@ -49,14 +49,14 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
                 class="footer-social-link"
                 title={social.linkTitle}
               >
-                <social.icon class="size-[18px] stroke-current stroke-[1.5]" />
+                <social.icon class="size-5 stroke-current stroke-2" />
               </a>
             ))}
           </div>
         )
       }
       <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">
-        <IconArrowUp class="size-4 stroke-current stroke-2" />
+        <IconArrowUp class="size-5 stroke-current stroke-2" />
       </button>
     </div>
   </div>
@@ -129,7 +129,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     font-size: 1rem;
     font-weight: 600;
     color: var(--foreground);
-    transition: color 0.2s;
+    transition: color var(--duration-normal);
   }
 
   .footer-logo:hover {
@@ -138,7 +138,7 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-copyright {
     font-size: 0.8125rem;
-    color: color-mix(in srgb, var(--foreground) 40%, transparent);
+    color: color-mix(in srgb, var(--foreground) var(--text-muted-light), transparent);
   }
 
   .footer-nav {
@@ -149,8 +149,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-nav a {
     font-size: 0.875rem;
-    color: color-mix(in srgb, var(--foreground) 55%, transparent);
-    transition: color 0.2s;
+    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    transition: color var(--duration-normal);
   }
 
   .footer-nav a:hover,
@@ -160,12 +160,12 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-search-btn {
     font-size: 0.875rem;
-    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color var(--duration-normal);
   }
 
   .footer-right {
@@ -180,8 +180,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   }
 
   .footer-social-link {
-    color: color-mix(in srgb, var(--foreground) 45%, transparent);
-    transition: color 0.2s;
+    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    transition: color var(--duration-normal);
   }
 
   .footer-social-link:hover {
@@ -192,13 +192,13 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     border: 1px solid var(--border);
-    color: color-mix(in srgb, var(--foreground) 50%, transparent);
+    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
     background: transparent;
-    transition: all 0.2s;
+    transition: all var(--duration-normal);
   }
 
   .back-to-top:hover {
