@@ -42,7 +42,10 @@ const { Content, headings } = await render(post);
 // Calculate reading time (~200 words per minute)
 function getReadingTime(content: string): string {
   const wordsPerMinute = 200;
-  const text = content.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  const text = content
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
   const words = text.split(" ").length;
   const minutes = Math.ceil(words / wordsPerMinute);
   return `${minutes} min read`;
@@ -71,7 +74,8 @@ const ogImage = ogImageUrl
   : undefined;
 
 // Check if we have a displayable hero image (local asset only, not dynamic OG)
-const hasHeroImage = initOgImage && typeof initOgImage !== "string" && initOgImage.src;
+const hasHeroImage =
+  initOgImage && typeof initOgImage !== "string" && initOgImage.src;
 const heroImageSrc = hasHeroImage ? initOgImage.src : null;
 
 const layoutProps = {
@@ -87,12 +91,14 @@ const layoutProps = {
 
 /* ========== Prev/Next Posts ========== */
 
-const allPosts = posts.map(({ data: { title, pubDatetime }, id, filePath }) => ({
-  id,
-  title,
-  pubDatetime,
-  filePath,
-}));
+const allPosts = posts.map(
+  ({ data: { title, pubDatetime }, id, filePath }) => ({
+    id,
+    title,
+    pubDatetime,
+    filePath,
+  })
+);
 
 const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
 
@@ -116,7 +122,12 @@ const tocHeadings: TocItem[] = [];
 let currentH2: TocItem | null = null;
 
 for (const heading of filteredHeadings) {
-  const item: TocItem = { slug: heading.slug, text: heading.text, depth: heading.depth, children: [] };
+  const item: TocItem = {
+    slug: heading.slug,
+    text: heading.text,
+    depth: heading.depth,
+    children: [],
+  };
 
   if (heading.depth === 2) {
     tocHeadings.push(item);
@@ -134,32 +145,36 @@ for (const heading of filteredHeadings) {
   <Header />
   <BackButton />
 
-  {/* Table of Contents - Fixed sidebar on wide screens (outside main for proper positioning) */}
-  {tocHeadings.length > 0 && (
-    <nav class="post-toc" aria-label="Table of contents">
-      <div class="post-toc-title">On This Page</div>
-      <ul class="post-toc-list">
-        {tocHeadings.map(item => (
-          <li class="post-toc-item">
-            <a href={`#${item.slug}`} class="post-toc-link">
-              {item.text}
-            </a>
-            {item.children.length > 0 && (
-              <ul class="post-toc-list">
-                {item.children.map(child => (
-                  <li class="post-toc-item post-toc-h3">
-                    <a href={`#${child.slug}`} class="post-toc-link">
-                      {child.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )}
+  {
+    /* Table of Contents - Fixed sidebar on wide screens (outside main for proper positioning) */
+  }
+  {
+    tocHeadings.length > 0 && (
+      <nav class="post-toc" aria-label="Table of contents">
+        <div class="post-toc-title">On This Page</div>
+        <ul class="post-toc-list">
+          {tocHeadings.map(item => (
+            <li class="post-toc-item">
+              <a href={`#${item.slug}`} class="post-toc-link">
+                {item.text}
+              </a>
+              {item.children.length > 0 && (
+                <ul class="post-toc-list">
+                  {item.children.map(child => (
+                    <li class="post-toc-item post-toc-h3">
+                      <a href={`#${child.slug}`} class="post-toc-link">
+                        {child.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
 
   <main
     id="main-content"
@@ -167,53 +182,57 @@ for (const heading of filteredHeadings) {
     data-pagefind-body
   >
     {/* Hero Section - Only show if we have a local image */}
-    {heroImageSrc ? (
-      <div class="post-hero">
-        <img
-          src={heroImageSrc}
-          alt={title}
-          class="post-hero-image"
-          loading="eager"
-        />
-        <div class="post-hero-overlay"></div>
-        <div class="post-hero-content">
+    {
+      heroImageSrc ? (
+        <div class="post-hero">
+          <img
+            src={heroImageSrc}
+            alt={title}
+            class="post-hero-image"
+            loading="eager"
+          />
+          <div class="post-hero-overlay" />
+          <div class="post-hero-content">
+            <h1
+              transition:name={slugifyStr(title.replaceAll(".", "-"))}
+              class="post-hero-title"
+            >
+              {title}
+            </h1>
+            <div class="post-hero-meta">
+              <span class="post-hero-meta-item">
+                <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+              </span>
+              <span class="reading-time">{readingTime}</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* Fallback: Original title design without hero image */
+        <div class="mb-8">
           <h1
             transition:name={slugifyStr(title.replaceAll(".", "-"))}
-            class="post-hero-title"
+            class="inline-block text-2xl font-bold text-accent sm:text-3xl"
           >
             {title}
           </h1>
-          <div class="post-hero-meta">
-            <span class="post-hero-meta-item">
-              <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-            </span>
+          <div class="my-2 flex flex-wrap items-center gap-2">
+            <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
             <span class="reading-time">{readingTime}</span>
+            <span
+              aria-hidden="true"
+              class:list={[
+                "max-sm:hidden",
+                { hidden: !SITE.editPost.enabled || hideEditPost },
+              ]}
+            >
+              |
+            </span>
+            <EditPost {hideEditPost} {post} class="max-sm:hidden" />
           </div>
         </div>
-      </div>
-    ) : (
-      /* Fallback: Original title design without hero image */
-      <div class="mb-8">
-        <h1
-          transition:name={slugifyStr(title.replaceAll(".", "-"))}
-          class="inline-block text-2xl font-bold text-accent sm:text-3xl"
-        >
-          {title}
-        </h1>
-        <div class="my-2 flex items-center gap-2 flex-wrap">
-          <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-          <span class="reading-time">{readingTime}</span>
-          <span
-            aria-hidden="true"
-            class:list={[
-              "max-sm:hidden",
-              { hidden: !SITE.editPost.enabled || hideEditPost },
-            ]}>|</span
-          >
-          <EditPost {hideEditPost} {post} class="max-sm:hidden" />
-        </div>
-      </div>
-    )}
+      )
+    }
 
     {/* Main article content */}
     <article
@@ -237,72 +256,81 @@ for (const heading of filteredHeadings) {
 
     {/* Enhanced Previous/Next Post Cards */}
     <nav data-pagefind-ignore class="post-nav" aria-label="Post navigation">
-      {prevPost && (
-        <a
-          href={getPath(prevPost.id, prevPost.filePath)}
-          class="post-nav-card post-nav-card--prev"
-        >
-          <span class="post-nav-label">
-            <IconChevronLeft class="post-nav-arrow post-nav-arrow--prev size-4 rtl:rotate-180" />
-            Previous
-          </span>
-          <span class="post-nav-title">{prevPost.title}</span>
-          <span class="post-nav-date">
-            {new Date(prevPost.pubDatetime).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-        </a>
-      )}
-      {nextPost && (
-        <a
-          href={getPath(nextPost.id, nextPost.filePath)}
-          class="post-nav-card post-nav-card--next"
-        >
-          <span class="post-nav-label">
-            Next
-            <IconChevronRight class="post-nav-arrow post-nav-arrow--next size-4 rtl:rotate-180" />
-          </span>
-          <span class="post-nav-title">{nextPost.title}</span>
-          <span class="post-nav-date">
-            {new Date(nextPost.pubDatetime).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-        </a>
-      )}
+      {
+        prevPost && (
+          <a
+            href={getPath(prevPost.id, prevPost.filePath)}
+            class="post-nav-card post-nav-card--prev"
+          >
+            <span class="post-nav-label">
+              <IconChevronLeft class="post-nav-arrow post-nav-arrow--prev size-4 rtl:rotate-180" />
+              Previous
+            </span>
+            <span class="post-nav-title">{prevPost.title}</span>
+            <span class="post-nav-date">
+              {new Date(prevPost.pubDatetime).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={getPath(nextPost.id, nextPost.filePath)}
+            class="post-nav-card post-nav-card--next"
+          >
+            <span class="post-nav-label">
+              Next
+              <IconChevronRight class="post-nav-arrow post-nav-arrow--next size-4 rtl:rotate-180" />
+            </span>
+            <span class="post-nav-title">{nextPost.title}</span>
+            <span class="post-nav-date">
+              {new Date(nextPost.pubDatetime).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+          </a>
+        )
+      }
     </nav>
 
     <!-- Let's Connect CTA -->
     <section data-pagefind-ignore class="about-cta mt-12">
       <h2 class="cta-title">Let's Connect</h2>
       <p class="cta-description">
-        Enjoyed this post? I'm always open to discussing new ideas, interesting projects, or just having a chat about technology.
+        Enjoyed this post? I'm always open to discussing new ideas, interesting
+        projects, or just having a chat about technology.
       </p>
       <div class="cta-actions">
-        {SOCIALS.length > 0 && (
-          <div class="cta-socials">
-            {SOCIALS.map(social => (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-btn group"
-                title={social.linkTitle}
-              >
-                <social.icon class="size-5 stroke-current stroke-[1.5] group-hover:stroke-accent group-hover:scale-110 transition-all duration-300" />
-                <span class="sr-only">{social.linkTitle}</span>
-              </a>
-            ))}
-          </div>
-        )}
+        {
+          SOCIALS.length > 0 && (
+            <div class="cta-socials">
+              {SOCIALS.map(social => (
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-btn group"
+                  title={social.linkTitle}
+                >
+                  <social.icon class="size-5 stroke-current stroke-[1.5] transition-all duration-300 group-hover:scale-110 group-hover:stroke-accent" />
+                  <span class="sr-only">{social.linkTitle}</span>
+                </a>
+              ))}
+            </div>
+          )
+        }
         <a href="/posts" class="btn-primary group">
           More Posts
-          <IconArrowRight class="size-4 group-hover:translate-x-1 transition-transform" />
+          <IconArrowRight
+            class="size-4 transition-transform group-hover:translate-x-1"
+          />
         </a>
       </div>
     </section>
@@ -427,20 +455,20 @@ for (const heading of filteredHeadings) {
 
   /** TOC active state based on scroll position */
   function initTOC() {
-    const tocLinks = document.querySelectorAll('.post-toc-link');
-    const tocItems = document.querySelectorAll('.post-toc-item');
-    const article = document.querySelector('article');
+    const tocLinks = document.querySelectorAll(".post-toc-link");
+    const tocItems = document.querySelectorAll(".post-toc-item");
+    const article = document.querySelector("article");
 
     if (!tocLinks.length || !article) return;
 
     // Get all headings from the article
-    const headings = article.querySelectorAll('h2, h3');
+    const headings = article.querySelectorAll("h2, h3");
 
     if (!headings.length) return;
 
     function updateTOC() {
       const scrollPos = window.scrollY + 120; // Offset for header
-      let currentId = '';
+      let currentId = "";
 
       // Find the current heading
       headings.forEach(heading => {
@@ -451,40 +479,44 @@ for (const heading of filteredHeadings) {
 
       // Update active states
       tocItems.forEach(item => {
-        const link = item.querySelector('.post-toc-link');
+        const link = item.querySelector(".post-toc-link");
         if (link) {
-          const href = link.getAttribute('href');
+          const href = link.getAttribute("href");
           const isActive = href === `#${currentId}`;
-          item.classList.toggle('active', isActive);
+          item.classList.toggle("active", isActive);
         }
       });
     }
 
     // Throttle scroll handler for performance
     let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateTOC();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateTOC();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
 
     // Initial update
     updateTOC();
 
     // Smooth scroll for TOC links
     tocLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener("click", e => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').slice(1);
+        const targetId = link.getAttribute("href").slice(1);
         const target = document.getElementById(targetId);
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
           // Update URL without triggering scroll
-          history.pushState(null, '', `#${targetId}`);
+          history.pushState(null, "", `#${targetId}`);
         }
       });
     });

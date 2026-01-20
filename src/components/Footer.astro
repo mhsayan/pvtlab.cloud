@@ -40,7 +40,9 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     <nav class="footer-nav">
       <a href="/posts">Posts</a>
       <a href="/about">About</a>
-      <button type="button" class="footer-search-btn" id="footer-search-btn">Search</button>
+      <button type="button" class="footer-search-btn" id="footer-search-btn"
+        >Search</button
+      >
       {SITE.showArchives && <a href="/archives">Archives</a>}
       <a href="/rss.xml" target="_blank">RSS</a>
     </nav>
@@ -64,7 +66,12 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
           </div>
         )
       }
-      <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">
+      <button
+        id="back-to-top"
+        class="back-to-top"
+        title="Back to top"
+        aria-label="Back to top"
+      >
         <IconArrowUp class="size-5 stroke-current stroke-2" />
       </button>
     </div>
@@ -86,7 +93,8 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     if (!btn) return;
 
     btn.addEventListener("click", () => {
-      const openSearchModal = (window as { openSearchModal?: () => void }).openSearchModal;
+      const openSearchModal = (window as { openSearchModal?: () => void })
+        .openSearchModal;
       if (openSearchModal) {
         openSearchModal();
       }
@@ -148,7 +156,11 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-copyright {
     font-size: 0.75rem;
-    color: color-mix(in srgb, var(--foreground) var(--text-muted-light), transparent);
+    color: color-mix(
+      in srgb,
+      var(--foreground) var(--text-muted-light),
+      transparent
+    );
   }
 
   .footer-nav {
@@ -167,7 +179,11 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-nav a {
     font-size: 0.875rem;
-    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    color: color-mix(
+      in srgb,
+      var(--foreground) var(--text-muted-medium),
+      transparent
+    );
     transition: color var(--duration-normal);
   }
 
@@ -178,7 +194,11 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
   .footer-search-btn {
     font-size: 0.875rem;
-    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    color: color-mix(
+      in srgb,
+      var(--foreground) var(--text-muted-medium),
+      transparent
+    );
     background: none;
     border: none;
     padding: 0;
@@ -205,7 +225,11 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   }
 
   .footer-social-link {
-    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    color: color-mix(
+      in srgb,
+      var(--foreground) var(--text-muted-medium),
+      transparent
+    );
     transition: color var(--duration-normal);
   }
 
@@ -221,7 +245,11 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     height: 2.5rem;
     border-radius: 50%;
     border: 1px solid var(--border);
-    color: color-mix(in srgb, var(--foreground) var(--text-muted-medium), transparent);
+    color: color-mix(
+      in srgb,
+      var(--foreground) var(--text-muted-medium),
+      transparent
+    );
     background: transparent;
     transition: all var(--duration-normal);
   }

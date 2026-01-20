@@ -39,7 +39,9 @@ const isActive = (path: string) => {
     "transition-all duration-300 ease-out",
   ]}
 >
-  <div class="app-layout flex flex-col items-center justify-between sm:flex-row">
+  <div
+    class="app-layout flex flex-col items-center justify-between sm:flex-row"
+  >
     <div
       id="top-nav-wrap"
       class:list={[
@@ -116,7 +118,7 @@ const isActive = (path: string) => {
             <button
               id="search-btn"
               type="button"
-              class="search-trigger-btn focus-outline p-2.5 sm:p-1.5 hover:text-accent"
+              class="search-trigger-btn focus-outline p-2.5 hover:text-accent sm:p-1.5"
               title="Search (⌘K)"
               aria-label="Open search"
             >
@@ -161,7 +163,8 @@ const isActive = (path: string) => {
     }
 
     searchBtn?.addEventListener("click", () => {
-      const openSearchModal = (window as { openSearchModal?: () => void }).openSearchModal;
+      const openSearchModal = (window as { openSearchModal?: () => void })
+        .openSearchModal;
       if (openSearchModal) {
         openSearchModal();
       }

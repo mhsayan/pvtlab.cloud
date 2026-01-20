@@ -16,16 +16,16 @@ const { title, description, tags, ...props } = data;
 <li class="group my-4">
   <article
     class:list={[
-      "card-hover p-5 sm:p-6 rounded-xl",
-      "bg-card-bg border border-border/50",
+      "card-hover rounded-xl p-5 sm:p-6",
+      "border border-border/50 bg-card-bg",
       "hover:border-accent/30 hover:bg-card-hover",
     ]}
   >
     <a
       href={getPath(id, filePath)}
       class:list={[
-        "block text-lg sm:text-xl font-semibold text-foreground",
-        "hover:text-accent transition-colors duration-200",
+        "block text-lg font-semibold text-foreground sm:text-xl",
+        "transition-colors duration-200 hover:text-accent",
         "focus-visible:no-underline focus-visible:underline-offset-0",
       ]}
     >
@@ -41,18 +41,22 @@ const { title, description, tags, ...props } = data;
       <Datetime {...props} class="text-sm text-foreground/70" />
     </div>
 
-    <p class="text-foreground/70 leading-relaxed text-sm sm:text-base line-clamp-2">
+    <p
+      class="line-clamp-2 text-sm leading-relaxed text-foreground/70 sm:text-base"
+    >
       {description}
     </p>
 
     {
       tags && tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-4">
+        <div class="mt-4 flex flex-wrap gap-2">
           {tags.slice(0, 3).map(tag => (
             <span class="tag-pill">{tag}</span>
           ))}
           {tags.length > 3 && (
-            <span class="text-xs text-foreground/55">+{tags.length - 3} more</span>
+            <span class="text-xs text-foreground/55">
+              +{tags.length - 3} more
+            </span>
           )}
         </div>
       )
