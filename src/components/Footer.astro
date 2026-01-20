@@ -23,7 +23,16 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   <div class="footer-main">
     <!-- Brand & Copyright -->
     <div class="footer-brand">
-      <a href="/" class="footer-logo">{SITE.title}</a>
+      <a href="/" class="site-logo site-logo-sm">
+        <span class="site-logo-icon">
+          <span class="site-logo-monogram">P</span>
+        </span>
+        <span class="site-logo-text">
+          <span class="site-logo-name">pvtlab</span>
+          <span class="site-logo-dot"></span>
+          <span class="site-logo-domain">cloud</span>
+        </span>
+      </a>
       <span class="footer-copyright">&copy; {currentYear}</span>
     </div>
 
@@ -123,17 +132,6 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-  }
-
-  .footer-logo {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--foreground);
-    transition: color var(--duration-normal);
-  }
-
-  .footer-logo:hover {
-    color: var(--accent);
   }
 
   .footer-copyright {
