@@ -60,3 +60,60 @@ pnpm run sync         # Generate TypeScript types for Astro modules
 - `no-console` rule is enforced (use proper logging instead)
 - Prettier with astro and tailwindcss plugins
 - Path alias `@/` maps to `src/`
+
+### Before Committing (IMPORTANT)
+
+Always run these commands before committing to avoid CI failures:
+
+```bash
+pnpm run lint         # Fix ESLint errors
+pnpm run format       # Auto-format with Prettier
+```
+
+### Common ESLint Issues to Avoid
+
+- **Unused variables**: Use `catch` instead of `catch (e)` or `catch (err)` when the error variable is not used
+- **No console**: Avoid `console.log` statements in production code
+- **Unused imports**: Remove any imports that are not being used
+
+### Prettier Formatting
+
+The CI pipeline runs `pnpm run format:check` which will fail if files are not formatted. Running `pnpm run format` locally before committing ensures all files follow the project's code style.
+
+## CI/CD Deployment
+
+### GitHub Actions Workflow
+
+The project uses GitHub Actions for automated deployment to GitHub Pages.
+
+- **Workflow file**: `.github/workflows/deploy.yml`
+- **Trigger**: Push to `main` branch only (not `Develop` or other branches)
+- **Manual trigger**: Available via `workflow_dispatch`
+- **Package manager**: pnpm (specified in workflow)
+
+### Deployment Process
+
+1. Code is pushed to `main` branch
+2. GitHub Actions runs:
+   - Checkout repository
+   - Install dependencies with pnpm
+   - Build Astro site (includes Pagefind indexing)
+   - Deploy to GitHub Pages
+3. Site is published to custom domain `pvtlab.cloud`
+
+### Custom Domain
+
+- **CNAME file**: `public/CNAME` contains `pvtlab.cloud`
+- **DNS**: Configured to point to GitHub Pages
+
+### Branch Strategy
+
+- `Develop`: Development branch for work in progress
+- `main`: Production branch - merging here triggers deployment
+
+### Troubleshooting CI Failures
+
+1. **ESLint errors**: Run `pnpm run lint` locally and fix all errors
+2. **Prettier errors**: Run `pnpm run format` locally
+3. **Lockfile outdated**: Run `pnpm install` to update `pnpm-lock.yaml`
+4. **Build errors**: Run `pnpm run build` locally to catch issues before pushing
