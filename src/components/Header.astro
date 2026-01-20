@@ -48,14 +48,18 @@ const isActive = (path: string) => {
         "flex items-baseline justify-between sm:items-center",
       ]}
     >
-      <a
-        href="/"
-        class:list={[
-          "absolute py-1 text-xl leading-8 font-bold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none",
-          "hover:text-accent transition-colors duration-200",
-        ]}
-      >
-        {SITE.title}
+      <a href="/" class="site-logo">
+        <span class="site-logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </span>
+        <span class="site-logo-text">
+          <span class="site-logo-name">pvtlab</span>
+          <span class="site-logo-dot"></span>
+          <span class="site-logo-domain">cloud</span>
+        </span>
       </a>
       <nav
         id="nav-menu"

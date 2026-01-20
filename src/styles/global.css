@@ -52,6 +52,7 @@ html[data-theme="dark"] {
   --font-app: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono, monospace);
   --font-display: var(--font-playfair-display, Georgia, serif);
+  --font-logo: "Poppins", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -2065,4 +2066,108 @@ html[data-theme="dark"] {
 
 .post-nav-card:hover .post-nav-arrow--next {
   transform: translateX(4px);
+}
+
+/* ========================================
+   SITE LOGO - Brand Logo Style
+   ======================================== */
+
+.site-logo {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.375rem 0.75rem 0.375rem 0.375rem;
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all var(--duration-normal) ease;
+}
+
+@media (min-width: 640px) {
+  .site-logo {
+    position: static;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-radius: 0.625rem;
+  }
+}
+
+.site-logo:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.site-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--accent);
+  border-radius: 0.375rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .site-logo-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+  }
+}
+
+.site-logo-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 640px) {
+  .site-logo-icon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+.site-logo-text {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-logo);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .site-logo-text {
+    font-size: 1rem;
+  }
+}
+
+.site-logo-name {
+  color: var(--foreground);
+  transition: color var(--duration-normal);
+}
+
+.site-logo-dot {
+  width: 4px;
+  height: 4px;
+  margin: 0 0.25rem;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.site-logo-domain {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Hover effect */
+.site-logo:hover .site-logo-name {
+  color: var(--accent);
 }
