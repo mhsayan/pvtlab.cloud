@@ -2105,31 +2105,32 @@ html[data-theme="dark"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   background: var(--accent);
-  border-radius: 0.375rem;
-  color: white;
+  border-radius: 0.5rem;
   flex-shrink: 0;
 }
 
 @media (min-width: 640px) {
   .site-logo-icon {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
   }
 }
 
-.site-logo-icon svg {
-  width: 1rem;
-  height: 1rem;
+.site-logo-monogram {
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: white;
+  line-height: 1;
 }
 
 @media (min-width: 640px) {
-  .site-logo-icon svg {
-    width: 1.125rem;
-    height: 1.125rem;
+  .site-logo-monogram {
+    font-size: 1.25rem;
   }
 }
 

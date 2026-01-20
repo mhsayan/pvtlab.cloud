@@ -15,6 +15,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
+    "@fontsource/great-vibes": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
     "@fontsource/sacramento": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
