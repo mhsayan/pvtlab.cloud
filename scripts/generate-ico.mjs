@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";
@@ -13,24 +14,24 @@ function createIco(pngBuffers) {
   // - 2 bytes: Type (1 for ICO)
   // - 2 bytes: Number of images
   const header = Buffer.alloc(6);
-  header.writeUInt16LE(0, 0);      // Reserved
-  header.writeUInt16LE(1, 2);      // Type: ICO
+  header.writeUInt16LE(0, 0); // Reserved
+  header.writeUInt16LE(1, 2); // Type: ICO
   header.writeUInt16LE(pngBuffers.length, 4); // Image count
 
   // Directory entries: 16 bytes each
   const entries = [];
-  let dataOffset = 6 + (16 * pngBuffers.length);
+  let dataOffset = 6 + 16 * pngBuffers.length;
 
   for (const { buffer, size } of pngBuffers) {
     const entry = Buffer.alloc(16);
-    entry.writeUInt8(size === 256 ? 0 : size, 0);  // Width (0 means 256)
-    entry.writeUInt8(size === 256 ? 0 : size, 1);  // Height (0 means 256)
-    entry.writeUInt8(0, 2);                        // Color palette
-    entry.writeUInt8(0, 3);                        // Reserved
-    entry.writeUInt16LE(1, 4);                     // Color planes
-    entry.writeUInt16LE(32, 6);                    // Bits per pixel
-    entry.writeUInt32LE(buffer.length, 8);         // Size of image data
-    entry.writeUInt32LE(dataOffset, 12);           // Offset to image data
+    entry.writeUInt8(size === 256 ? 0 : size, 0); // Width (0 means 256)
+    entry.writeUInt8(size === 256 ? 0 : size, 1); // Height (0 means 256)
+    entry.writeUInt8(0, 2); // Color palette
+    entry.writeUInt8(0, 3); // Reserved
+    entry.writeUInt16LE(1, 4); // Color planes
+    entry.writeUInt16LE(32, 6); // Bits per pixel
+    entry.writeUInt32LE(buffer.length, 8); // Size of image data
+    entry.writeUInt32LE(dataOffset, 12); // Offset to image data
 
     entries.push(entry);
     dataOffset += buffer.length;
@@ -40,7 +41,7 @@ function createIco(pngBuffers) {
   return Buffer.concat([
     header,
     ...entries,
-    ...pngBuffers.map(p => p.buffer)
+    ...pngBuffers.map(p => p.buffer),
   ]);
 }
 

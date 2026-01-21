@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import sharp from "sharp";
-import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -29,7 +29,9 @@ async function generateIcons() {
     console.log(`Generated ${name} (${size}x${size})`);
   }
   console.log("\nAll icons generated successfully!");
-  console.log("\nNote: To create favicon.ico, use https://favicon.io/favicon-converter/");
+  console.log(
+    "\nNote: To create favicon.ico, use https://favicon.io/favicon-converter/"
+  );
   console.log("Upload the favicon-32.png file to generate the .ico file.");
 }
 
