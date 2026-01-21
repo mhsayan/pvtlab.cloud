@@ -6,42 +6,49 @@ import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 
-// Work experience data
+// Work experience data - grouped by company to show career progression
 const experiences = [
   {
     company: "OnnoRokom Software Ltd.",
-    role: "Software Engineer (R&D)",
-    duration: "Jan 2025 - Present",
-    description:
-      "Leading development initiatives in the R&D department, architecting scalable solutions and mentoring team members on best practices.",
-    highlights: [
-      "Designing and implementing software infrastructure and architecture",
-      "Building microservices with ASP.NET Core, Docker, and Kubernetes",
-      "Implementing CI/CD pipelines with GitHub Actions and Argo CD",
-    ],
-  },
-  {
-    company: "OnnoRokom Software Ltd.",
-    role: "Assistant Software Engineer (R&D)",
-    duration: "Mar 2022 - Dec 2024",
-    description:
-      "Full-stack .NET developer in the R&D department, building enterprise applications and gaining expertise across the entire development lifecycle.",
-    highlights: [
-      "Developed ASP.NET Core MVC, API, and Worker Service applications",
-      "Worked with Entity Framework Core, SQL Server, PostgreSQL, and MongoDB",
-      "Implemented messaging with RabbitMQ, Kafka, and real-time features with SignalR",
-      "Set up monitoring with ElasticSearch, Grafana, and Prometheus",
+    roles: [
+      {
+        title: "Software Engineer (R&D)",
+        duration: "Jan 2025 - Present",
+        description:
+          "Leading development initiatives in the R&D department, architecting scalable solutions and mentoring team members on best practices.",
+        highlights: [
+          "Designing and implementing software infrastructure and architecture",
+          "Building microservices with ASP.NET Core, Docker, and Kubernetes",
+          "Implementing CI/CD pipelines with GitHub Actions and Argo CD",
+        ],
+      },
+      {
+        title: "Assistant Software Engineer (R&D)",
+        duration: "Mar 2022 - Dec 2024",
+        description:
+          "Full-stack .NET developer in the R&D department, building enterprise applications and gaining expertise across the entire development lifecycle.",
+        highlights: [
+          "Developed ASP.NET Core MVC, API, and Worker Service applications",
+          "Worked with Entity Framework Core, SQL Server, PostgreSQL, and MongoDB",
+          "Implemented messaging with RabbitMQ, Kafka, and real-time features with SignalR",
+          "Set up monitoring with ElasticSearch, Grafana, and Prometheus",
+        ],
+      },
     ],
   },
   {
     company: "Dev Skill",
-    role: "Junior Software Engineer (Internship)",
-    duration: "Nov 2021 - Jan 2022",
-    description:
-      "Completed intensive training in full-stack ASP.NET Core development, building foundational skills in professional software development.",
-    highlights: [
-      "Completed Full Stack ASP.NET Core MVC certification",
-      "Learned professional C# programming patterns and practices",
+    roles: [
+      {
+        title: "Junior Software Engineer (Internship)",
+        duration: "Nov 2021 - Jan 2022",
+        description:
+          "Completed intensive training in full-stack ASP.NET Core development, building foundational skills in professional software development.",
+        highlights: [
+          "Completed Full Stack ASP.NET Core MVC certification",
+          "Learned professional C# programming patterns and practices",
+        ],
+      },
     ],
   },
 ];
@@ -109,19 +116,27 @@ const experiences = [
                 class="experience-card card-hover"
                 style={`--delay: ${0.4 + index * 0.1}s`}
               >
-                <div class="experience-header">
+                <div class="experience-company-header">
                   <div class="experience-company">{exp.company}</div>
-                  <div class="experience-duration">{exp.duration}</div>
                 </div>
-                <div class="experience-role">{exp.role}</div>
-                <p class="experience-description">{exp.description}</p>
-                {exp.highlights && exp.highlights.length > 0 && (
-                  <ul class="experience-highlights">
-                    {exp.highlights.map(highlight => (
-                      <li>{highlight}</li>
-                    ))}
-                  </ul>
-                )}
+                <div class="experience-roles">
+                  {exp.roles.map((role, roleIndex) => (
+                    <div class={`experience-role-item ${roleIndex > 0 ? "experience-role-separator" : ""}`}>
+                      <div class="experience-role-header">
+                        <div class="experience-role">{role.title}</div>
+                        <div class="experience-duration">{role.duration}</div>
+                      </div>
+                      <p class="experience-description">{role.description}</p>
+                      {role.highlights && role.highlights.length > 0 && (
+                        <ul class="experience-highlights">
+                          {role.highlights.map(highlight => (
+                            <li>{highlight}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </article>
             ))
           }

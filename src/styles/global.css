@@ -1488,6 +1488,42 @@ html[data-theme="dark"] {
   border-radius: 50%;
 }
 
+/* Company header - shows company name once at top */
+.experience-company-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+/* Container for all roles within a company */
+.experience-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Individual role item */
+.experience-role-item {
+  padding-top: 0;
+}
+
+/* Separator between roles (for promotions) */
+.experience-role-separator {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Role header - contains title and duration */
+.experience-role-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 /* CTA Section */
 .about-cta {
   text-align: center;
