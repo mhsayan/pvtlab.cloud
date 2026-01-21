@@ -3,6 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 import { SOCIALS } from "@/constants";
 import { SITE } from "@/config";
 import IconArrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
+import LogoMark from "./LogoMark.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -25,7 +26,10 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     <div class="footer-brand">
       <a href="/" class="site-logo site-logo-sm">
         <span class="site-logo-icon">
-          <span class="site-logo-monogram">P</span>
+          <LogoMark
+            size={12}
+            class="site-logo-monogram-svg site-logo-monogram-svg-sm"
+          />
         </span>
         <span class="site-logo-text">
           <span class="site-logo-name">pvtlab</span>

@@ -6,6 +6,7 @@ import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
+import LogoMark from "./LogoMark.astro";
 import { SITE } from "@/config";
 
 const { pathname } = Astro.url;
@@ -52,7 +53,7 @@ const isActive = (path: string) => {
     >
       <a href="/" class="site-logo">
         <span class="site-logo-icon">
-          <span class="site-logo-monogram">P</span>
+          <LogoMark size={16} class="site-logo-monogram-svg" />
         </span>
         <span class="site-logo-text">
           <span class="site-logo-name">pvtlab</span>
