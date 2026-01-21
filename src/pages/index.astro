@@ -191,15 +191,19 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         )
       }
 
-      <div class="pb-16 text-center">
-        <LinkButton
-          href="/posts/"
-          class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-accent/90 hover:text-white hover:shadow-lg hover:shadow-accent/25"
-        >
-          View All Posts
-          <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
-        </LinkButton>
-      </div>
+      {
+        sortedPosts.length > 0 && (
+          <div class="pb-16 text-center">
+            <LinkButton
+              href="/posts/"
+              class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-accent/90 hover:text-white hover:shadow-lg hover:shadow-accent/25"
+            >
+              View All Posts
+              <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
+            </LinkButton>
+          </div>
+        )
+      }
     </div>
   </main>
   <Footer />
