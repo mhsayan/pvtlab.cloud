@@ -121,7 +121,9 @@ const experiences = [
                 </div>
                 <div class="experience-roles">
                   {exp.roles.map((role, roleIndex) => (
-                    <div class={`experience-role-item ${roleIndex > 0 ? "experience-role-separator" : ""}`}>
+                    <div
+                      class={`experience-role-item ${roleIndex > 0 ? "experience-role-separator" : ""}`}
+                    >
                       <div class="experience-role-header">
                         <div class="experience-role">{role.title}</div>
                         <div class="experience-duration">{role.duration}</div>
