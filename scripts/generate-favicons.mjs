@@ -6,9 +6,9 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "..", "public");
 
-// SVG with black fill (for PNG generation - no CSS media queries)
+// SVG with amber background and white P (matches logo monogram style)
 const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#000"/>
+  <rect width="128" height="128" rx="16" ry="16" fill="#b45309"/>
   <path fill="#FFF" d="M32 16h40c22.1 0 40 17.9 40 40s-17.9 40-40 40H48v16c0 4.4-3.6 8-8 8s-8-3.6-8-8V24c0-4.4 3.6-8 8-8zm16 64h24c13.3 0 24-10.7 24-24s-10.7-24-24-24H48v48z"/>
 </svg>`;
 
