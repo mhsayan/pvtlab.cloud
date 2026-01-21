@@ -54,6 +54,75 @@ pnpm run sync         # Generate TypeScript types for Astro modules
 - `PostDetails.astro`: Single post layout with TOC support
 - `AboutLayout.astro`: About page layout
 
+## Blog Post Workflow
+
+### Quick Reference - Frontmatter Template
+
+```yaml
+---
+author: Mahmudul Hasan Sayan  # Optional, defaults to SITE.author
+pubDatetime: 2025-01-21T10:00:00Z  # Required, ISO 8601
+modDatetime:  # Add only when updating existing post
+title: Your Post Title  # Required
+slug: custom-slug  # Optional, auto-generated from filename
+featured: false  # Set true for essential docs or major releases
+draft: false
+tags:
+  - docs  # Use established tags (see below)
+ogImage: ""  # Optional, auto-generated if omitted
+description: Brief 1-2 sentence summary.  # Required
+---
+```
+
+### Established Tag Taxonomy
+
+Use these standard tags for consistency:
+
+- `docs` - Documentation/reference posts
+- `configuration` - Theme/setup configuration guides
+- `release` - Version announcements
+- `FAQ` - Frequently asked questions
+- Tech stack tags: `TypeScript`, `Astro`, `TailwindCSS`, etc.
+
+### Naming Conventions
+
+- **Files**: kebab-case (`how-to-configure-theme.md`)
+- **Slugs**: auto-generated from filename or explicit kebab-case
+- **Directories**: Use `_` prefix to exclude folder name from URL (e.g., `_releases/`)
+
+### Content Structure Pattern
+
+- Start with brief intro paragraph
+- Add `## Table of contents` after intro (auto-populated)
+- Use H2 (`##`) for main sections (NOT H1)
+- Use code blocks with `file="path"` annotation for file examples
+- Use `<figure>` tags for images with attribution
+
+### Featured Post Criteria
+
+Set `featured: true` for:
+- Essential documentation (getting started, configuration)
+- Major version releases
+- High-value SEO/discovery content
+
+### Directory Organization
+
+```
+src/data/blog/
+├── post.md              # Regular post → /posts/post
+├── 2025/post.md         # Dated post → /posts/2025/post
+├── _releases/           # Underscore = folder excluded from URL
+│   └── v5.md            # → /posts/v5 (not /posts/_releases/v5)
+└── examples/            # Demo posts
+```
+
+### Image Guidelines
+
+- Store in `src/assets/images/` for optimization
+- Reference using `@/assets/images/file.png` or relative paths
+- OG images: 1200 x 640 px recommended
+- Compress with TinyPng/TinyJPG before adding
+
 ## Code Style
 
 - ESLint configured with TypeScript and Astro plugins

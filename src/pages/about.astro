@@ -6,30 +6,49 @@ import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 
-// Work experience data
+// Work experience data - grouped by company to show career progression
 const experiences = [
   {
-    company: "Company Name",
-    role: "Software Developer",
-    duration: "2023 - Present",
-    description:
-      "Building modern web applications and contributing to open-source projects. Working with React, TypeScript, and Node.js to deliver scalable solutions.",
-    highlights: [
-      "Developed and maintained multiple client-facing applications",
-      "Collaborated with cross-functional teams to deliver features",
-      "Implemented CI/CD pipelines and improved deployment processes",
+    company: "OnnoRokom Software Ltd.",
+    roles: [
+      {
+        title: "Software Engineer (R&D)",
+        duration: "Jan 2025 - Present",
+        description:
+          "Leading development initiatives in the R&D department, architecting scalable solutions and mentoring team members on best practices.",
+        highlights: [
+          "Designing and implementing software infrastructure and architecture",
+          "Building microservices with ASP.NET Core, Docker, and Kubernetes",
+          "Implementing CI/CD pipelines with GitHub Actions and Argo CD",
+        ],
+      },
+      {
+        title: "Assistant Software Engineer (R&D)",
+        duration: "Mar 2022 - Dec 2024",
+        description:
+          "Full-stack .NET developer in the R&D department, building enterprise applications and gaining expertise across the entire development lifecycle.",
+        highlights: [
+          "Developed ASP.NET Core MVC, API, and Worker Service applications",
+          "Worked with Entity Framework Core, SQL Server, PostgreSQL, and MongoDB",
+          "Implemented messaging with RabbitMQ, Kafka, and real-time features with SignalR",
+          "Set up monitoring with ElasticSearch, Grafana, and Prometheus",
+        ],
+      },
     ],
   },
   {
-    company: "Previous Company",
-    role: "Junior Developer",
-    duration: "2021 - 2023",
-    description:
-      "Started my professional journey learning best practices in software development and contributing to team projects.",
-    highlights: [
-      "Built responsive web interfaces using modern frameworks",
-      "Participated in code reviews and agile ceremonies",
-      "Assisted in database design and API development",
+    company: "Dev Skill",
+    roles: [
+      {
+        title: "Junior Software Engineer (Internship)",
+        duration: "Nov 2021 - Jan 2022",
+        description:
+          "Completed intensive training in full-stack ASP.NET Core development, building foundational skills in professional software development.",
+        highlights: [
+          "Completed Full Stack ASP.NET Core MVC certification",
+          "Learned professional C# programming patterns and practices",
+        ],
+      },
     ],
   },
 ];
@@ -55,7 +74,7 @@ const experiences = [
         </div>
         <div class="hero-fade-in" style="--delay: 0.1s">
           <p class="about-hero-subtitle">
-            Developer, Creator, Lifelong Learner
+            Software Engineer | .NET Developer | Cloud & DevOps Enthusiast
           </p>
         </div>
       </div>
@@ -67,19 +86,22 @@ const experiences = [
       <section class="about-section hero-fade-in" style="--delay: 0.2s">
         <div class="about-intro">
           <p>
-            Hi! I'm <strong>Mahmudul Hasan Sayan</strong>, a passionate
-            developer based in Bangladesh. I love building things for the web
-            and exploring new technologies.
+            Hi! I'm <strong>Mahmudul Hasan Sayan</strong>, a Software Engineer
+            based in Dhaka, Bangladesh. I specialize in building scalable web
+            applications using .NET technologies and cloud-native architectures.
           </p>
           <p>
-            This is my digital space where I share my thoughts, ideas, and
-            things I learn along the way. I believe in continuous learning and
-            the power of sharing knowledge with the community.
+            With a Master's degree in Computer Science and over 3 years of
+            professional experience, I work on enterprise solutions involving
+            microservices, containerization, and DevOps practices. I'm
+            passionate about clean code, performance optimization, and
+            continuous learning.
           </p>
           <p>
-            When I'm not coding, you'll find me exploring new ideas, reading
-            about technology trends, or working on personal projects that
-            challenge me to grow.
+            This is my digital space where I share my thoughts on software
+            development, architecture patterns, and things I learn along the
+            way. When I'm not coding, you'll find me exploring new technologies
+            or contributing to the developer community.
           </p>
         </div>
       </section>
@@ -94,19 +116,29 @@ const experiences = [
                 class="experience-card card-hover"
                 style={`--delay: ${0.4 + index * 0.1}s`}
               >
-                <div class="experience-header">
+                <div class="experience-company-header">
                   <div class="experience-company">{exp.company}</div>
-                  <div class="experience-duration">{exp.duration}</div>
                 </div>
-                <div class="experience-role">{exp.role}</div>
-                <p class="experience-description">{exp.description}</p>
-                {exp.highlights && exp.highlights.length > 0 && (
-                  <ul class="experience-highlights">
-                    {exp.highlights.map(highlight => (
-                      <li>{highlight}</li>
-                    ))}
-                  </ul>
-                )}
+                <div class="experience-roles">
+                  {exp.roles.map((role, roleIndex) => (
+                    <div
+                      class={`experience-role-item ${roleIndex > 0 ? "experience-role-separator" : ""}`}
+                    >
+                      <div class="experience-role-header">
+                        <div class="experience-role">{role.title}</div>
+                        <div class="experience-duration">{role.duration}</div>
+                      </div>
+                      <p class="experience-description">{role.description}</p>
+                      {role.highlights && role.highlights.length > 0 && (
+                        <ul class="experience-highlights">
+                          {role.highlights.map(highlight => (
+                            <li>{highlight}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </article>
             ))
           }
